@@ -34,7 +34,22 @@
     <a-assets>
       <!-- models go here -->
     </a-assets>
+    
+    <!-- Left Controller -->
+<a-entity
+  laser-controls="hand: left"
+  raycaster="objects: .clickable"
+  line="opacity: 0.6"
+></a-entity>
 
+<!-- Right Controller -->
+<a-entity
+  laser-controls="hand: right"
+  raycaster="objects: .clickable"
+  line="opacity: 0.6"
+></a-entity>
+    
+<!-- camara -->
     <a-entity id="rig" position="0 0 0">
   <a-camera
     position="0 1.6 0"
@@ -42,7 +57,6 @@
     wasd-controls
   ></a-camera>
 </a-entity>
-
 
       <!-- floor -->
     <a-plane rotation="-90 0 0" width="20" height="20" color="#111"></a-plane>
