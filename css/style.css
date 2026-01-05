@@ -5,14 +5,39 @@ body {
   color: white;
 }
 
+/* UI container */
 #ui {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 10;
+  pointer-events: none;
 }
 
-h1 {
+/* Brand block */
+#brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Logo */
+#logo {
+  width: 96px;
+  height: auto;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+}
+
+/* Text */
+#brand-text h1 {
   margin: 0;
-  letter-spacing: 2px;
+  font-size: 24px;
+  letter-spacing: 3px;
+}
+
+#brand-text p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  opacity: 0.7;
+  letter-spacing: 1px;
 }
