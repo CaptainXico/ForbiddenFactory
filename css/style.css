@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: monospace;
+  background: black;
+  color: white;
+}
+
+#ui {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+h1 {
+  margin: 0;
+  letter-spacing: 2px;
+}
