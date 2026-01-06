@@ -32,6 +32,8 @@ AFRAME.registerComponent("joystick-move", {
   tick(time, delta) {
     if (!this.el.sceneEl.is("vr-mode")) return;
 
+     console.log("joystick-move running");
+
     const gamepads = navigator.getGamepads();
     if (!gamepads) return;
 
