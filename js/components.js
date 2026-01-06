@@ -18,15 +18,21 @@ AFRAME.registerComponent("product", {
 /* =========================
    JOYSTICK MOVEMENT (PICO 4)
    ========================= */
-AFRAME.registerComponent("joystick-move", {
+// movement.js — Pico 4 compatible smooth locomotion
+
+AFRAME.registerComponent("pico-move", {
   schema: {
-    speed: { default: 2 }
+    speed: { default: 2.0 } // meters per second
   },
 
   init() {
-    this.rig = document.getElementById("rig");
+    this.rig = document.getElementById("camera-rig");
+    this.camera = document.getElementById("camera");
+
     this.direction = new THREE.Vector3();
     this.rotation = new THREE.Euler(0, 0, 0, "YXZ");
+
+    console.log("Pico movement component initialized");
   },
 
   tick(time, delta) {
@@ -35,26 +41,27 @@ AFRAME.registerComponent("joystick-move", {
     const gamepads = navigator.getGamepads();
     if (!gamepads) return;
 
+    // Find a controller with axes
     let gp = null;
-    for (const gamepad of gamepads) {
-      if (gamepad && gamepad.axes && gamepad.axes.length >= 2) {
-        gp = gamepad;
+    for (const pad of gamepads) {
+      if (pad && pad.axes && pad.axes.length >= 2) {
+        gp = pad;
         break;
       }
     }
     if (!gp) return;
 
-    const x = gp.axes[0] || 0;
-    const y = -gp.axes[1] || 0;
+    // Pico left joystick
+    const x = gp.axes[0] || 0;        // left / right
+    const y = -gp.axes[1] || 0;       // forward / back (inverted)
 
     // Deadzone
     if (Math.abs(x) < 0.15 && Math.abs(y) < 0.15) return;
 
     const deltaSec = delta / 1000;
 
-    const camera = this.el.sceneEl.camera;
-    this.rotation.setFromQuaternion(camera.quaternion);
-
+    // Head-relative movement
+    this.rotation.setFromQuaternion(this.camera.object3D.quaternion);
     this.direction.set(x, 0, y).normalize();
     this.direction.applyEuler(this.rotation);
 
@@ -64,4 +71,5 @@ AFRAME.registerComponent("joystick-move", {
     );
   }
 });
+
 
