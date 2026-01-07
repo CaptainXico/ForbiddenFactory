@@ -38,6 +38,8 @@ AFRAME.registerComponent("pico-move", {
   tick(time, delta) {
     if (!this.el.sceneEl.is("vr-mode")) return;
 
+     console.log("tick running", x, y);
+
     const gamepads = navigator.getGamepads();
     if (!gamepads) return;
 
