@@ -1,6 +1,11 @@
+const isVR = AFRAME.utils.device.checkHeadsetConnected();
+
 AFRAME.registerComponent('hover-effect', {
   init() {
-    const box = this.el.querySelector('a-box');
+    const box = this.el.querySelector('.interactive');
+    if (!box) return;
+
+    const isVR = AFRAME.utils.device.checkHeadsetConnected();
 
     const highlight = () => {
       box.setAttribute('color', '#00ffcc');
@@ -10,13 +15,16 @@ AFRAME.registerComponent('hover-effect', {
       box.setAttribute('color', '#222');
     };
 
-    // Desktop (mouse)
-    this.el.addEventListener('mouseenter', highlight);
-    this.el.addEventListener('mouseleave', unhighlight);
+    if (isVR) {
+      // VR CONTROLLERS ONLY
+      box.addEventListener('raycaster-intersected', highlight);
+      box.addEventListener('raycaster-intersected-cleared', unhighlight);
 
-    // VR (controllers)
-    this.el.addEventListener('raycaster-intersected', highlight);
-    this.el.addEventListener('raycaster-intersected-cleared', unhighlight);
+    } else {
+      // DESKTOP ONLY
+      box.addEventListener('mouseenter', highlight);
+      box.addEventListener('mouseleave', unhighlight);
+    }
   }
 });
 
