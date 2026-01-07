@@ -11,3 +11,12 @@ AFRAME.registerComponent('hover-effect', {
     });
   }
 });
+
+AFRAME.registerComponent('desktop-cursor-only', {
+  init() {
+    if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
+      this.el.setAttribute('visible', true);
+    }
+  }
+});
+
