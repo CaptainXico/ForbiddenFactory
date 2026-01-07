@@ -34,20 +34,28 @@
   <a-scene background="color: #000">
     <a-assets></a-assets>
 
-    <!-- CAMERA RIG -->
-    <a-entity id="camera-rig" pico-move>
-      <a-camera id="camera" position="0 1.6 0"></a-camera>
+                <!-- Camera rig with controllers as children -->
+      <a-entity id="camera-rig">
+        <a-camera id="camera" position="0 1.6 0"></a-camera>
 
-      <a-entity
-        id="left-controller"
-        laser-controls="hand: left">
-      </a-entity>
+        <!-- Left controller -->
+        <a-entity
+          id="left-controller"
+          laser-controls="hand: left"
+          raycaster="objects: .interactive; far: 10"
+          line="color: #00ff00; opacity: 0.8; width: 0.02;"
+          thumbstick-audio
+        ></a-entity>
 
-      <a-entity
-        id="right-controller"
-        laser-controls="hand: right">
+        <!-- Right controller -->
+        <a-entity
+          id="right-controller"
+          laser-controls="hand: right"
+          raycaster="objects: .interactive; far: 10"
+          line="color: #00ff00; opacity: 0.8; width: 0.02;"
+          thumbstick-audio
+        ></a-entity>
       </a-entity>
-    </a-entity>
 
     <!-- FLOOR -->
     <a-plane rotation="-90 0 0" width="20" height="20" color="#111"></a-plane>
