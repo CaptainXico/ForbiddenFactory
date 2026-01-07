@@ -1,5 +1,3 @@
-const isVR = AFRAME.utils.device.checkHeadsetConnected();
-
 AFRAME.registerComponent('hover-effect', {
   init() {
     const box = this.el.querySelector('.interactive');
@@ -28,6 +26,7 @@ AFRAME.registerComponent('hover-effect', {
   }
 });
 
+const isVR = AFRAME.utils.device.checkHeadsetConnected();
 
 AFRAME.registerComponent('desktop-cursor-only', {
   init() {
