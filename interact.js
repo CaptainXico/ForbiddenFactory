@@ -11,22 +11,11 @@ AFRAME.registerComponent('hover-effect', {
       box.setAttribute('color', '#222');
     };
 
-    const enableDesktopHover = () => {
-      box.addEventListener('mouseenter', highlight);
-      box.addEventListener('mouseleave', unhighlight);
-    };
-
-    const enableVRHover = () => {
-      box.addEventListener('raycaster-intersected', highlight);
-      box.addEventListener('raycaster-intersected-cleared', unhighlight);
-    };
-
-    const sceneEl = this.el.sceneEl;
-
-    // Desktop first (default)
-    if (!sceneEl.is('vr-mode')) {
-      enableDesktopHover();
-    }
+    // Ray-based hover (PC + VR)
+    box.addEventListener('raycaster-intersected', highlight);
+    box.addEventListener('raycaster-intersected-cleared', unhighlight);
+  }
+});
 
     // Switch to VR when entering VR
     sceneEl.addEventListener('enter-vr', () => {
