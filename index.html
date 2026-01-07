@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>ForbiddenFactory</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html>
+  <head>
+    <title>christmas forest</title>
+    <meta name="description" content="lookout for santa" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="movement.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #000">
+      
+      <a-assets>
+        <a-asset-item
+          id="treemodel"
+          src="https://cdn.glitch.global/2392092b-a3aa-4a16-8417-e249fd35b325/mini_christmas_tree.glb"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="snowmodel"
+          src="https://cdn.glitch.global/2392092b-a3aa-4a16-8417-e249fd35b325/snow_on_the_ground.glb"
+        ></a-asset-item>
+        
+        <a-asset-item
+          id="santa"
+          src="https://cdn.glitch.global/63dde3ab-67b5-47b0-84a0-1323af2691f2/santa_claus_statue_3d_scan.glb?v=1731250836787"
+        ></a-asset-item>
+        
+      </a-assets>
+      
+      <a-sky color="#ECECEC"></a-sky>
 
-  <!-- A-Frame MUST be first -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+      <!-- Snowy ground plane -->
+      <a-plane 
+        position="0 0 -10" 
+        rotation="-90 0 0" 
+        width="100" 
+        height="100" 
+        color="#FFFFFF" 
+        material="opacity: 0.9; roughness: 1"
+      ></a-plane>
 
-  <!-- Your scripts AFTER A-Frame -->
-  <script src="js/products.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/ui.js"></script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-
-  <!-- UI OVERLAY -->
-  <div id="ui">
-    <div id="brand">
-      <img src="assets/images/logo.png" id="logo" />
-      <div id="brand-text">
-        <h1>ForbiddenFactory</h1>
-        <p>Devices & Raspberry Pi Creations</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- A-Frame Scene -->
-  <a-scene background="color: #000">
-    <a-assets></a-assets>
-
-                <!-- Camera rig with controllers as children -->
+            <!-- Camera rig with controllers as children -->
       <a-entity id="camera-rig">
         <a-camera id="camera" position="0 1.6 0"></a-camera>
 
@@ -56,16 +62,6 @@
           thumbstick-audio
         ></a-entity>
       </a-entity>
-
-    <!-- FLOOR -->
-    <a-plane rotation="-90 0 0" width="20" height="20" color="#111"></a-plane>
-
-    <a-box position="0 1 -3" color="#222"></a-box>
-
-    <!-- LIGHTS -->
-    <a-light type="ambient" intensity="0.4"></a-light>
-    <a-light type="point" position="0 4 2" intensity="1"></a-light>
-  </a-scene>
-
-</body>
+    </a-scene>
+  </body>
 </html>
