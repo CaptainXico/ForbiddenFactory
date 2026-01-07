@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>christmas forest</title>
-    <meta name="description" content="lookout for santa" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Forest</title>
+    <meta name="description" content="Lookout for Santa">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="movement.js"></script>
   </head>
   <body>
     <a-scene background="color: #000">
-      
       <a-assets>
         <a-asset-item
           id="treemodel"
@@ -24,7 +25,6 @@
           id="santa"
           src="https://cdn.glitch.global/63dde3ab-67b5-47b0-84a0-1323af2691f2/santa_claus_statue_3d_scan.glb?v=1731250836787"
         ></a-asset-item>
-        
       </a-assets>
       
       <a-sky color="#ECECEC"></a-sky>
@@ -39,8 +39,40 @@
         material="opacity: 0.9; roughness: 1"
       ></a-plane>
 
+      <!-- Add some trees using the tree model -->
+      <a-entity
+        gltf-model="#treemodel"
+        position="-5 0 -15"
+        scale="2 2 2"
+      ></a-entity>
+      
+      <a-entity
+        gltf-model="#treemodel"
+        position="5 0 -20"
+        scale="2 2 2"
+      ></a-entity>
+      
+      <a-entity
+        gltf-model="#treemodel"
+        position="-8 0 -25"
+        scale="2 2 2"
+      ></a-entity>
+      
+      <!-- Add snow ground -->
+      <a-entity
+        gltf-model="#snowmodel"
+        position="0 -0.5 -10"
+        scale="10 10 10"
+      ></a-entity>
+      
+      <!-- Add Santa -->
+      <a-entity
+        gltf-model="#santa"
+        position="0 0 -30"
+        scale="0.5 0.5 0.5"
+      ></a-entity>
 
-            <!-- Camera rig with controllers as children -->
+      <!-- Camera rig with controllers as children -->
       <a-entity id="camera-rig">
         <a-camera id="camera" position="0 1.6 0"></a-camera>
 
