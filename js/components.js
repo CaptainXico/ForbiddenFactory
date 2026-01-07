@@ -22,7 +22,7 @@ AFRAME.registerComponent("product", {
 
 AFRAME.registerComponent("pico-move", {
   schema: {
-    speed: { default: 2.0 } // meters per second
+    speed: { default: 2.0 }
   },
 
   init() {
@@ -38,12 +38,9 @@ AFRAME.registerComponent("pico-move", {
   tick(time, delta) {
     if (!this.el.sceneEl.is("vr-mode")) return;
 
-     console.log("tick running", x, y);
-
     const gamepads = navigator.getGamepads();
     if (!gamepads) return;
 
-    // Find a controller with axes
     let gp = null;
     for (const pad of gamepads) {
       if (pad && pad.axes && pad.axes.length >= 2) {
@@ -53,9 +50,11 @@ AFRAME.registerComponent("pico-move", {
     }
     if (!gp) return;
 
-    // Pico left joystick
-    const x = gp.axes[0] || 0;        // left / right
-    const y = -gp.axes[1] || 0;       // forward / back (inverted)
+    // Pico joystick axes
+    const x = gp.axes[0] || 0;
+    const y = -gp.axes[1] || 0;
+
+    console.log("tick running", x, y);
 
     // Deadzone
     if (Math.abs(x) < 0.15 && Math.abs(y) < 0.15) return;
@@ -73,5 +72,3 @@ AFRAME.registerComponent("pico-move", {
     );
   }
 });
-
-
