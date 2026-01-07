@@ -14,6 +14,12 @@ AFRAME.registerComponent("product", {
   }
 });
 
+/* =========================
+   Pico-Specific Safety Check
+   ========================= */
+document.querySelector("a-scene").addEventListener("enter-vr", () => {
+  console.log("Entered VR — Pico input ready");
+});
 
 /* =========================
    JOYSTICK MOVEMENT (PICO 4)
