@@ -33,7 +33,7 @@ AFRAME.registerComponent('desktop-cursor-only', {
 // Model Load 
 AFRAME.registerComponent('product-button', {
   schema: {
-    model: { type: 'string' }
+    product: { type: 'string' }
   },
 
   init() {
@@ -41,17 +41,35 @@ AFRAME.registerComponent('product-button', {
       const showcase = document.querySelector('#showcase');
       if (!showcase) return;
 
+      const product = products[this.data.product];
+      if (!product) return;
+
+      const current = showcase.querySelector('[gltf-model]');
+
+      // TOGGLE
+      if (
+        current &&
+        current.dataset.product === this.data.product
+      ) {
+        showcase.innerHTML = '';
+        return;
+      }
+
       // Clear previous model
       showcase.innerHTML = '';
 
       const model = document.createElement('a-entity');
-      model.setAttribute('gltf-model', this.data.model);
+      model.setAttribute('gltf-model', product.model);
+      model.setAttribute('scale', product.scale);
+      model.setAttribute('rotation', product.rotation || '0 0 0');
       model.setAttribute('position', '0 0 0');
-      model.setAttribute('scale', '1 1 1');
-      model.setAttribute('rotation', '0 180 0');
+
+      // 🔒 Track which product is shown
+      model.dataset.product = this.data.product;
 
       showcase.appendChild(model);
     });
   }
 });
+
 
