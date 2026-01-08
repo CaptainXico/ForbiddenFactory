@@ -41,18 +41,16 @@ AFRAME.registerComponent('product-button', {
       const showcase = document.querySelector('#showcase');
       if (!showcase) return;
 
-      // Remove previous model
-      while (showcase.firstChild) {
-        showcase.removeChild(showcase.firstChild);
-      }
+      // Clear previous model
+      showcase.innerHTML = '';
 
-      // Create new model
-      const modelEl = document.createElement('a-entity');
-      modelEl.setAttribute('gltf-model', this.data.model);
-      modelEl.setAttribute('scale', '0.5 0.5 0.5');
-      modelEl.setAttribute('rotation', '0 180 0');
+      const model = document.createElement('a-entity');
+      model.setAttribute('gltf-model', this.data.model);
+      model.setAttribute('position', '0 0 0');
+      model.setAttribute('scale', '1 1 1');
+      model.setAttribute('rotation', '0 180 0');
 
-      showcase.appendChild(modelEl);
+      showcase.appendChild(model);
     });
   }
 });
