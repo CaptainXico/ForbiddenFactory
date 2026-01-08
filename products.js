@@ -4,7 +4,7 @@ const products = {
     name: "Raspberry Pi Control Module",
     price: "$49",
     description: "Custom Pi-based control unit with GPIO breakout.",
-    model: "#piModel",
+    model: "#RasberryPi",
     scale: '0.1 0.1 0.1',
     rotation: '0 180 0'
   },
@@ -12,7 +12,7 @@ const products = {
     name: "Pi Sensor Hub",
     price: "$69",
     description: "Multi-sensor expansion board.",
-    model: "#sensorModel",
+    model: "#RasberryPi",
     scale: '0.1 0.1 0.1'
   }
 };
