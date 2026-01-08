@@ -5,7 +5,7 @@ const products = {
     price: "$49",
     description: "Custom Pi-based control unit with GPIO breakout.",
     model: "#piModel",
-    scale: '0.35 0.35 0.35',
+    scale: '0.1 0.1 0.1',
     rotation: '0 180 0'
   },
   piModule02: {
@@ -13,6 +13,6 @@ const products = {
     price: "$69",
     description: "Multi-sensor expansion board.",
     model: "#sensorModel",
-    scale: '0.35 0.35 0.35'
+    scale: '0.1 0.1 0.1'
   }
 };
