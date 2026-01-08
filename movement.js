@@ -1,6 +1,5 @@
 // movement.js
 
-// Set up movement variables
 const speed = 0.05;
 
 window.addEventListener('load', () => {
@@ -8,55 +7,42 @@ window.addEventListener('load', () => {
   const camera = document.getElementById('camera');
   const leftController = document.getElementById('left-controller');
 
-  if (!cameraRig || !camera || !leftController) {
-    console.error("Camera rig, camera, or left controller not found!");
+  if (!cameraRig || !leftController) {
+    console.error("Camera rig or left controller not found!");
     return;
   }
 
-  console.log("Movement script initialized successfully.");
-
-  // Listen for thumbstick movement
+  // LEFT CONTROLLER MOVEMENT (uses rig rotation)
   leftController.addEventListener('thumbstickmoved', (event) => {
-  const { x, y } = event.detail;
+    const { x, y } = event.detail;
 
-  // 🔁 USE RIG ROTATION (NOT CAMERA)
-  const yaw = cameraRig.object3D.rotation.y;
+    const yaw = cameraRig.object3D.rotation.y;
 
-  const forward = new THREE.Vector3(
-    -Math.sin(yaw),
-    0,
-    -Math.cos(yaw)
-  );
+    const forward = new THREE.Vector3(
+      -Math.sin(yaw),
+      0,
+      -Math.cos(yaw)
+    );
 
-  const right = new THREE.Vector3(
-    Math.cos(yaw),
-    0,
-    -Math.sin(yaw)
-  );
+    const right = new THREE.Vector3(
+      Math.cos(yaw),
+      0,
+      -Math.sin(yaw)
+    );
 
-  forward.multiplyScalar(y * speed * -1);
-  right.multiplyScalar(x * speed);
+    forward.multiplyScalar(-y * speed);
+    right.multiplyScalar(x * speed);
 
-  cameraRig.object3D.position.add(forward);
-  cameraRig.object3D.position.add(right);
+    cameraRig.object3D.position.add(forward);
+    cameraRig.object3D.position.add(right);
+  });
 });
 
-    // Scale movement by thumbstick input
-    forward.multiplyScalar(-y * speed); // Forward/backward inverted
-    right.multiplyScalar(x * speed);   // Left/right unchanged
-
-    // Update camera-rig position
-    const position = cameraRig.object3D.position;
-    position.add(forward);
-    position.add(right);
-
-    console.log("Camera rig position updated to:", position);
-  });
   
 // Turn the camera left and right in the right controller
 AFRAME.registerComponent('vr-smooth-turn', {
   schema: {
-    speed: { type: 'number', default: 60 } // degrees per second
+    speed: { type: 'number', default: 90 } // degrees per second
   },
 
   init() {
