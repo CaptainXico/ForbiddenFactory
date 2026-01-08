@@ -29,3 +29,31 @@ AFRAME.registerComponent('desktop-cursor-only', {
     }
   }
 });
+
+// Model Load 
+AFRAME.registerComponent('product-button', {
+  schema: {
+    model: { type: 'string' }
+  },
+
+  init() {
+    this.el.addEventListener('click', () => {
+      const showcase = document.querySelector('#showcase');
+      if (!showcase) return;
+
+      // Remove previous model
+      while (showcase.firstChild) {
+        showcase.removeChild(showcase.firstChild);
+      }
+
+      // Create new model
+      const modelEl = document.createElement('a-entity');
+      modelEl.setAttribute('gltf-model', this.data.model);
+      modelEl.setAttribute('scale', '0.5 0.5 0.5');
+      modelEl.setAttribute('rotation', '0 180 0');
+
+      showcase.appendChild(modelEl);
+    });
+  }
+});
+
