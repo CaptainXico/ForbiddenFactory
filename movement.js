@@ -45,4 +45,37 @@ window.addEventListener('load', () => {
 
     console.log("Camera rig position updated to:", position);
   });
+
+AFRAME.registerComponent('vr-smooth-turn', {
+  schema: {
+    speed: { type: 'number', default: 60 } // degrees per second
+  },
+
+  init() {
+    this.rig = document.querySelector('#camera-rig');
+    this.axisX = 0;
+  },
+
+  tick(time, delta) {
+    if (!this.rig) return;
+
+    // delta in seconds
+    const dt = delta / 1000;
+
+    if (Math.abs(this.axisX) > 0.2) {
+      const rotation = this.rig.getAttribute('rotation');
+      rotation.y -= this.axisX * this.data.speed * dt;
+      this.rig.setAttribute('rotation', rotation);
+    }
+  },
+
+  events: {
+    thumbstickmoved(evt) {
+      // Horizontal axis only
+      this.axisX = evt.detail.x;
+    }
+  }
+});
+
+  
 });
