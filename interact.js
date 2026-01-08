@@ -72,4 +72,25 @@ AFRAME.registerComponent('product-button', {
   }
 });
 
+AFRAME.registerComponent('input-mode-manager', {
+  init() {
+    const scene = this.el.sceneEl;
+    const cursor = document.querySelector('#desktop-cursor');
+
+    if (!cursor) return;
+
+    // Desktop mode (default)
+    cursor.setAttribute('raycaster', 'objects: .interactive');
+
+    scene.addEventListener('enter-vr', () => {
+      // Disable desktop cursor raycasting in VR
+      cursor.removeAttribute('raycaster');
+    });
+
+    scene.addEventListener('exit-vr', () => {
+      // Re-enable desktop cursor raycasting
+      cursor.setAttribute('raycaster', 'objects: .interactive');
+    });
+  }
+});
 
