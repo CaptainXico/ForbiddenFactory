@@ -136,5 +136,3 @@ AFRAME.registerComponent('vr-smooth-turn', {
   }
 });
 
-  
-});
