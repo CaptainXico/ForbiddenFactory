@@ -17,22 +17,29 @@ window.addEventListener('load', () => {
 
   // Listen for thumbstick movement
   leftController.addEventListener('thumbstickmoved', (event) => {
-    const { x, y } = event.detail; // x = left/right, y = forward/backward
+  const { x, y } = event.detail;
 
-    // Get the camera's rotation
-    const cameraRotation = camera.object3D.rotation;
+  // 🔁 USE RIG ROTATION (NOT CAMERA)
+  const yaw = cameraRig.object3D.rotation.y;
 
-    // Calculate movement direction relative to the camera's orientation
-    const forward = new THREE.Vector3(
-      -Math.sin(cameraRotation.y), // Keep forward/backward inverted
-      0,
-      -Math.cos(cameraRotation.y)
-    );
-    const right = new THREE.Vector3(
-      -forward.z, // Side movement remains the same
-      0,
-      forward.x
-    );
+  const forward = new THREE.Vector3(
+    -Math.sin(yaw),
+    0,
+    -Math.cos(yaw)
+  );
+
+  const right = new THREE.Vector3(
+    Math.cos(yaw),
+    0,
+    -Math.sin(yaw)
+  );
+
+  forward.multiplyScalar(y * speed * -1);
+  right.multiplyScalar(x * speed);
+
+  cameraRig.object3D.position.add(forward);
+  cameraRig.object3D.position.add(right);
+});
 
     // Scale movement by thumbstick input
     forward.multiplyScalar(-y * speed); // Forward/backward inverted
