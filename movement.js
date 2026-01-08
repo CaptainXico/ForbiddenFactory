@@ -45,7 +45,8 @@ window.addEventListener('load', () => {
 
     console.log("Camera rig position updated to:", position);
   });
-
+  
+// Turn the camera left and right in the right controller
 AFRAME.registerComponent('vr-smooth-turn', {
   schema: {
     speed: { type: 'number', default: 60 } // degrees per second
@@ -74,6 +75,57 @@ AFRAME.registerComponent('vr-smooth-turn', {
       // Horizontal axis only
       this.axisX = evt.detail.x;
     }
+  }
+});
+
+  // Jumping
+    AFRAME.registerComponent('player-jump', {
+  schema: {
+    height: { type: 'number', default: 1.2 },
+    gravity: { type: 'number', default: -9.8 }
+  },
+
+  init() {
+    this.rig = document.querySelector('#camera-rig');
+    this.velocityY = 0;
+    this.isGrounded = true;
+
+    // Desktop: SPACE
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        this.jump();
+      }
+    });
+
+    // VR buttons
+    this.el.addEventListener('abuttondown', () => this.jump()); // Right controller (A)
+    this.el.addEventListener('xbuttondown', () => this.jump()); // Left controller (X)
+  },
+
+  jump() {
+    if (!this.isGrounded || !this.rig) return;
+
+    this.velocityY = Math.sqrt(-2 * this.data.gravity * this.data.height);
+    this.isGrounded = false;
+  },
+
+  tick(time, delta) {
+    if (!this.rig || this.isGrounded) return;
+
+    const dt = delta / 1000;
+    this.velocityY += this.data.gravity * dt;
+
+    const pos = this.rig.getAttribute('position');
+    pos.y += this.velocityY * dt;
+
+    // Ground collision
+    if (pos.y <= 0) {
+      pos.y = 0;
+      this.velocityY = 0;
+      this.isGrounded = true;
+    }
+
+    this.rig.setAttribute('position', pos);
   }
 });
 
