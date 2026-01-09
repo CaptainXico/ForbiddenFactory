@@ -13,42 +13,59 @@ window.addEventListener('load', () => {
   }
 
   // LEFT CONTROLLER MOVEMENT (uses rig rotation)
-  leftController.addEventListener('thumbstickmoved', (event) => {
-  const deadzone = 0.15;
-  let { x, y } = event.detail;
+const speed = 1.6; // meters per second
 
-  // Apply deadzone
-  if (Math.abs(x) < deadzone) x = 0;
-  if (Math.abs(y) < deadzone) y = 0;
+AFRAME.registerComponent('smooth-locomotion', {
+  init() {
+    this.rig = document.querySelector('#camera-rig');
+    this.axisX = 0;
+    this.axisY = 0;
+    this.deadzone = 0.15;
+  },
 
-  // No movement
-  if (x === 0 && y === 0) return;
+  tick(time, delta) {
+    if (!this.rig) return;
 
-  // Normalize input vector
-  const length = Math.sqrt(x * x + y * y);
-  x /= length;
-  y /= length;
+    const dt = delta / 1000;
 
-  const yaw = cameraRig.object3D.rotation.y;
+    let x = this.axisX;
+    let y = this.axisY;
 
-  const forward = new THREE.Vector3(
-    -Math.sin(yaw),
-    0,
-    -Math.cos(yaw)
-  );
+    // Deadzone
+    if (Math.abs(x) < this.deadzone) x = 0;
+    if (Math.abs(y) < this.deadzone) y = 0;
 
-  const right = new THREE.Vector3(
-    Math.cos(yaw),
-    0,
-    -Math.sin(yaw)
-  );
+    if (x === 0 && y === 0) return;
 
-  forward.multiplyScalar(-y * speed);
-  right.multiplyScalar(x * speed);
+    const yaw = this.rig.object3D.rotation.y;
 
-  cameraRig.object3D.position.add(forward);
-  cameraRig.object3D.position.add(right);
+    const forward = new THREE.Vector3(
+      -Math.sin(yaw),
+      0,
+      -Math.cos(yaw)
+    );
+
+    const right = new THREE.Vector3(
+      Math.cos(yaw),
+      0,
+      -Math.sin(yaw)
+    );
+
+    forward.multiplyScalar(-y * speed * dt);
+    right.multiplyScalar(x * speed * dt);
+
+    this.rig.object3D.position.add(forward);
+    this.rig.object3D.position.add(right);
+  },
+
+  events: {
+    thumbstickmoved(evt) {
+      this.axisX = evt.detail.x;
+      this.axisY = evt.detail.y;
+    }
+  }
 });
+
 
 });
 
