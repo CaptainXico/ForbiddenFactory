@@ -16,3 +16,34 @@ const products = {
     scale: '0.1 0.1 0.1'
   }
 };
+
+this.el.sceneEl.emit('product-selected', {
+  productId: this.data.product
+});
+
+AFRAME.registerComponent('product-info-panel', {
+  init() {
+    this.el.sceneEl.addEventListener('product-selected', (e) => {
+      const product = products[e.detail.productId];
+      if (!product) return;
+
+      this.el.querySelector('.title')
+        .setAttribute('value', product.name);
+
+      this.el.querySelector('.price')
+        .setAttribute('value', product.price);
+
+      this.el.querySelector('.desc')
+        .setAttribute('value', product.description);
+    });
+  }
+});
+
+AFRAME.registerComponent('product-showcase', {
+  init() {
+    this.el.sceneEl.addEventListener('product-selected', (e) => {
+      this.loadModel(e.detail.productId);
+    });
+  }
+});
+
