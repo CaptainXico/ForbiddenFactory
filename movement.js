@@ -14,28 +14,42 @@ window.addEventListener('load', () => {
 
   // LEFT CONTROLLER MOVEMENT (uses rig rotation)
   leftController.addEventListener('thumbstickmoved', (event) => {
-    const { x, y } = event.detail;
+  const deadzone = 0.15;
+  let { x, y } = event.detail;
 
-    const yaw = cameraRig.object3D.rotation.y;
+  // Apply deadzone
+  if (Math.abs(x) < deadzone) x = 0;
+  if (Math.abs(y) < deadzone) y = 0;
 
-    const forward = new THREE.Vector3(
-      -Math.sin(yaw),
-      0,
-      -Math.cos(yaw)
-    );
+  // No movement
+  if (x === 0 && y === 0) return;
 
-    const right = new THREE.Vector3(
-      Math.cos(yaw),
-      0,
-      -Math.sin(yaw)
-    );
+  // Normalize input vector
+  const length = Math.sqrt(x * x + y * y);
+  x /= length;
+  y /= length;
 
-    forward.multiplyScalar(-y * speed);
-    right.multiplyScalar(x * speed);
+  const yaw = cameraRig.object3D.rotation.y;
 
-    cameraRig.object3D.position.add(forward);
-    cameraRig.object3D.position.add(right);
-  });
+  const forward = new THREE.Vector3(
+    -Math.sin(yaw),
+    0,
+    -Math.cos(yaw)
+  );
+
+  const right = new THREE.Vector3(
+    Math.cos(yaw),
+    0,
+    -Math.sin(yaw)
+  );
+
+  forward.multiplyScalar(-y * speed);
+  right.multiplyScalar(x * speed);
+
+  cameraRig.object3D.position.add(forward);
+  cameraRig.object3D.position.add(right);
+});
+
 });
 
   
