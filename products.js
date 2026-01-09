@@ -23,27 +23,37 @@ this.el.sceneEl.emit('product-selected', {
 
 AFRAME.registerComponent('product-info-panel', {
   init() {
+    const panel = this.el;
+    const animator = panel.components['ui-panel-animate'];
+
     this.el.sceneEl.addEventListener('product-selected', (e) => {
       const product = products[e.detail.productId];
       if (!product) return;
 
-      this.el.querySelector('.title')
-        .setAttribute('value', product.name);
+      panel.querySelector('.title')?.setAttribute('value', product.name);
+      panel.querySelector('.price')?.setAttribute('value', product.price);
+      panel.querySelector('.desc')?.setAttribute('value', product.description);
 
-      this.el.querySelector('.price')
-        .setAttribute('value', product.price);
-
-      this.el.querySelector('.desc')
-        .setAttribute('value', product.description);
+      animator.show();
+      document.querySelector('#panel-actions')
+        .components['ui-panel-animate'].show();
     });
   }
 });
+
 
 AFRAME.registerComponent('product-showcase', {
   init() {
     this.el.sceneEl.addEventListener('product-selected', (e) => {
-      this.loadModel(e.detail.productId);
+      const product = products[e.detail.productId];
+      if (!product) return;
+
+      this.el.setAttribute('gltf-model', product.model);
+      this.el.setAttribute('scale', product.scale);
+      if (product.rotation)
+        this.el.setAttribute('rotation', product.rotation);
     });
   }
 });
+
 
