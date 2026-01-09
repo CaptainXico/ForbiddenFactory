@@ -42,70 +42,48 @@
         smooth-move
       ></a-entity>
 
-      <!-- PRODUCT SELECTION WALL -->
-    <a-entity id="product-wall" position="-4 1.5 -5" rotation="0 90 0">
-      <!-- Wall background -->
-      <a-plane
-        width="3"
-        height="2.5"
-        color="#111"
-      ></a-plane>
+      <a-entity class="ui-panel" position="0 0 0">
 
-        <!-- PRODUCT BUTTON 1 -->
-      <a-entity
-        position="0 0.7 0.01"
-        product-button="product: piModule01"
-        hover-effect
-      >
+  <!-- Panels -->
+  <a-plane
+    class="ui-panel-bg"
+    width="2.5"
+    height="2.8"
+    color="#111"
+    material="opacity: 0.95; metalness: 0.1; roughness: 0.8"
+  ></a-plane>
 
-        <!-- Button body -->
-        <a-box
-          class="interactive"
-          width="2.4"
-          height="0.4"
-          depth="0.05"
-          color="#222"
-        ></a-box>
+</a-entity>
 
-        <!-- Button text -->
-        <a-text
-          value="Raspberry Pi Control Module 1"
-          align="center"
-          width="2.2"
-          position="0 0 0.03"
-          color="#fff"
-        ></a-text>
+  <!-- PRODUCT LIST PANEL -->
+<a-entity id="panel-list"
+          position="-3 1.6 -4"
+          rotation="0 30 0"
+          class="ui-panel">
 
-      </a-entity>
+  <a-plane width="2.5" height="2.8" color="#111"></a-plane>
 
-        <!-- PRODUCT BUTTON 2 -->
-      <a-entity
-        position="0 0.2 0.01"
-        product-button="product: piModule02"
-        hover-effect
-      >
+</a-entity>
 
-        <!-- Button body -->
-        <a-box
-          class="interactive"
-          width="2.4"
-          height="0.4"
-          depth="0.05"
-          color="#222"
-        ></a-box>
+<!-- PRODUCT INFO PANEL -->
+<a-entity id="panel-info"
+          position="0 1.6 -4.5"
+          class="ui-panel">
 
-        <!-- Button text -->
-        <a-text
-          value="Raspberry Pi Control Module 2"
-          align="center"
-          width="2.2"
-          position="0 0 0.03"
-          color="#fff"
-        ></a-text>
+  <a-plane width="2.8" height="3" color="#1a1a1a"></a-plane>
 
-      </a-entity>
+</a-entity>
 
-    </a-entity>
+<!-- ACTION PANEL -->
+<a-entity id="panel-actions"
+          position="3 1.6 -4"
+          rotation="0 -30 0"
+          class="ui-panel">
+
+  <a-plane width="2.2" height="2.4" color="#111"></a-plane>
+
+</a-entity>
+
 
     
 
