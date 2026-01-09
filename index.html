@@ -9,6 +9,7 @@
     <script src="movement.js"></script>
     <script src="interact.js"></script>
     <script src="products.js"></script>
+    <script src="ui.js"></script>
   </head>
   <body>
     
@@ -57,9 +58,9 @@
 
   <!-- PRODUCT LIST PANEL -->
 <a-entity id="panel-list"
-          position="-3 1.6 -4"
-          rotation="0 30 0"
-          class="ui-panel">
+  ui-panel-animate="
+    hiddenPosition: -6 1.6 -4;
+    visiblePosition: -3 1.6 -4">
 
   <a-plane width="2.5" height="2.8" color="#111"></a-plane>
 
@@ -67,18 +68,20 @@
 
 <!-- PRODUCT INFO PANEL -->
 <a-entity id="panel-info"
-          position="0 1.6 -4.5"
-          class="ui-panel">
-
+  ui-panel-animate="
+    hiddenPosition: 0 1.6 -7;
+    visiblePosition: 0 1.6 -4.5"
+  product-info-panel>
+  
   <a-plane width="2.8" height="3" color="#1a1a1a"></a-plane>
 
 </a-entity>
 
 <!-- ACTION PANEL -->
 <a-entity id="panel-actions"
-          position="3 1.6 -4"
-          rotation="0 -30 0"
-          class="ui-panel">
+  ui-panel-animate="
+    hiddenPosition: 6 1.6 -4;
+    visiblePosition: 3 1.6 -4">
 
   <a-plane width="2.2" height="2.4" color="#111"></a-plane>
 
