@@ -17,10 +17,6 @@ const products = {
   }
 };
 
-this.el.sceneEl.emit('product-selected', {
-  productId: this.data.product
-});
-
 AFRAME.registerComponent('product-info-panel', {
   init() {
     const panel = this.el;
