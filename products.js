@@ -37,16 +37,42 @@ AFRAME.registerComponent('product-info-panel', {
 
 AFRAME.registerComponent('product-showcase', {
   init() {
+    this.modelEl = null;
+
     this.el.sceneEl.addEventListener('product-selected', (e) => {
       const product = products[e.detail.productId];
       if (!product) return;
 
-      this.el.setAttribute('gltf-model', product.model);
-      this.el.setAttribute('scale', product.scale);
-      if (product.rotation)
-        this.el.setAttribute('rotation', product.rotation);
+      // Remove old model
+      if (this.modelEl) {
+        this.el.removeChild(this.modelEl);
+      }
+
+      // Create new model
+      const model = document.createElement('a-entity');
+      model.setAttribute('gltf-model', product.model);
+      model.setAttribute('scale', product.scale);
+      model.setAttribute('position', '0 0 0');
+
+      if (product.rotation) {
+        model.setAttribute('rotation', product.rotation);
+      }
+
+      // OPTIONAL AUTO-ROTATION (PUT IT HERE)
+      model.setAttribute('animation', {
+        property: 'rotation',
+        to: '0 360 0',
+        loop: true,
+        dur: 12000,
+        easing: 'linear'
+      });
+
+      // Attach model
+      this.el.appendChild(model);
+      this.modelEl = model;
     });
   }
 });
+
 
 
