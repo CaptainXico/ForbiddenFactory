@@ -30,9 +30,6 @@ AFRAME.registerComponent('product-info-panel', {
       panel.querySelector('.price')?.setAttribute('value', product.price);
       panel.querySelector('.desc')?.setAttribute('value', product.description);
 
-      animator.show();
-      document.querySelector('#panel-actions')
-        .components['ui-panel-animate'].show();
     });
   }
 });
