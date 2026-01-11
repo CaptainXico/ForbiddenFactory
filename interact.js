@@ -30,7 +30,6 @@ AFRAME.registerComponent('desktop-cursor-only', {
   }
 });
 
-// Model Load 
 AFRAME.registerComponent('product-button', {
   schema: {
     product: { type: 'string' }
@@ -38,10 +37,6 @@ AFRAME.registerComponent('product-button', {
 
   init() {
     this.el.addEventListener('click', () => {
-      const product = products[this.data.product];
-      if (!product) return;
-
-      // 🔔 Emit global UI event
       this.el.sceneEl.emit('product-selected', {
         productId: this.data.product
       });
