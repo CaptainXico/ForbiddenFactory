@@ -62,9 +62,47 @@
     hiddenPosition: -6 1.6 -4;
     visiblePosition: -3 1.6 -4">
 
+  <!-- Background -->
   <a-plane width="2.5" height="2.8" color="#111"></a-plane>
 
+  <!-- BUTTON 1 -->
+  <a-entity position="0 0.8 0.01"
+            product-button="product: piModule01"
+            hover-effect>
+
+    <a-box class="interactive"
+           width="2.2"
+           height="0.4"
+           depth="0.05"
+           color="#222"></a-box>
+
+    <a-text value="Raspberry Pi Module"
+            align="center"
+            width="2"
+            position="0 0 0.03"
+            color="#fff"></a-text>
+  </a-entity>
+
+  <!-- BUTTON 2 -->
+  <a-entity position="0 0.2 0.01"
+            product-button="product: piModule02"
+            hover-effect>
+
+    <a-box class="interactive"
+           width="2.2"
+           height="0.4"
+           depth="0.05"
+           color="#222"></a-box>
+
+    <a-text value="Pi Sensor Hub"
+            align="center"
+            width="2"
+            position="0 0 0.03"
+            color="#fff"></a-text>
+  </a-entity>
+
 </a-entity>
+
 
 <!-- PRODUCT INFO PANEL -->
 <a-entity id="panel-info"
@@ -72,10 +110,37 @@
     hiddenPosition: 0 1.6 -7;
     visiblePosition: 0 1.6 -4.5"
   product-info-panel>
-  
+
+  <!-- Background -->
   <a-plane width="2.8" height="3" color="#1a1a1a"></a-plane>
 
+  <!-- TITLE -->
+  <a-text class="title"
+          value=""
+          width="2.4"
+          position="0 1.1 0.02"
+          align="center"
+          color="#fff"></a-text>
+
+  <!-- PRICE -->
+  <a-text class="price"
+          value=""
+          width="2"
+          position="0 0.7 0.02"
+          align="center"
+          color="#00ffcc"></a-text>
+
+  <!-- DESCRIPTION -->
+  <a-text class="desc"
+          value=""
+          width="2.4"
+          position="0 0.2 0.02"
+          align="center"
+          wrap-count="35"
+          color="#ccc"></a-text>
+
 </a-entity>
+
 
 <!-- ACTION PANEL -->
 <a-entity id="panel-actions"
@@ -85,7 +150,24 @@
 
   <a-plane width="2.2" height="2.4" color="#111"></a-plane>
 
+  <a-entity position="0 0 0.02"
+            hover-effect>
+
+    <a-box class="interactive"
+           width="1.8"
+           height="0.5"
+           depth="0.05"
+           color="#00aa88"></a-box>
+
+    <a-text value="ADD TO CART"
+            align="center"
+            width="2"
+            position="0 0 0.03"
+            color="#fff"></a-text>
+  </a-entity>
+
 </a-entity>
+
 
 
     
