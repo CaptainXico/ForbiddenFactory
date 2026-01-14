@@ -41,25 +41,50 @@
   <!-- PRODUCT LIST PANEL -->
 <a-entity id="panel-list" ui-panel-animate="hiddenPosition: -3 1.6 -8; visiblePosition: -1.8 1.6 -8">
 
-  <!-- Background -->
-  <a-plane width="2.8" height="3" color="#111"></a-plane>
+   <!-- SHADOW -->
+  <a-plane width="2.9" height="3.1"
+           position="0 -0.03 -0.02"
+           material="color: #000; opacity: 0.35"></a-plane>
+
+  <!-- FRAME -->
+  <a-plane width="2.8" height="3"
+           color="#141414"
+           material="metalness: 0.1; roughness: 0.85"></a-plane>
+
+  <!-- HEADER -->
+  <a-plane width="2.8" height="0.45"
+           position="0 1.275 0.01"
+           color="#1f1f1f"></a-plane>
+
+  <a-text value="PRODUCTS"
+          position="0 1.275 0.02"
+          align="center"
+          width="2.5"
+          color="#ffffff"></a-text>
 
   <!-- BUTTON 1 -->
   <a-entity position="0 0.8 0.01"
             product-button="product: piModule01"
             hover-effect>
 
-    <a-box class="interactive"
-           width="2.2"
-           height="0.4"
-           depth="0.05"
-           color="#222"></a-box>
+    <!-- BUTTON SHADOW -->
+  <a-box width="2.25" height="0.42" depth="0.02"
+         position="0 -0.02 -0.02"
+         color="#000"
+         opacity="0.4"></a-box>
 
-    <a-text value="Raspberry Pi Module"
-            align="center"
-            width="2"
-            position="0 0 0.03"
-            color="#fff"></a-text>
+  <!-- BUTTON -->
+  <a-box class="interactive"
+         width="2.2"
+         height="0.4"
+         depth="0.05"
+         color="#222"></a-box>
+
+  <a-text value="Raspberry Pi Module"
+          align="center"
+          width="2"
+          position="0 0 0.035"
+          color="#fff"></a-text>
   </a-entity>
 
   <!-- BUTTON 2 -->
@@ -86,33 +111,34 @@
 <!-- PRODUCT INFO PANEL -->
 <a-entity id="panel-info" position="0 1.6 -8" product-info-panel position="0 0 0">
 
-  <!-- Background -->
   <a-plane width="2.8" height="3" color="#1a1a1a"></a-plane>
 
-  <!-- TITLE -->
-  <a-text class="title"
-          value=""
-          width="2.4"
-          position="0 1.1 0.02"
-          align="center"
-          color="#fff"></a-text>
+<!-- PRODUCT NAME -->
+<a-text class="title"
+        position="0 1.2 0.02"
+        width="2.4"
+        align="center"
+        color="#fff"></a-text>
 
-  <!-- PRICE -->
-  <a-text class="price"
-          value=""
-          width="2"
-          position="0 0.7 0.02"
-          align="center"
-          color="#00ffcc"></a-text>
+<!-- DIVIDER -->
+<a-plane width="2.4" height="0.01"
+         position="0 0.95 0.02"
+         color="#333"></a-plane>
 
-  <!-- DESCRIPTION -->
-  <a-text class="desc"
-          value=""
-          width="2.4"
-          position="0 0.2 0.02"
-          align="center"
-          wrap-count="35"
-          color="#ccc"></a-text>
+<!-- PRICE -->
+<a-text class="price"
+        position="0 0.7 0.02"
+        width="2"
+        align="center"
+        color="#00ffcc"></a-text>
+
+<!-- DESCRIPTION -->
+<a-text class="desc"
+        position="0 0.1 0.02"
+        width="2.4"
+        wrap-count="38"
+        align="left"
+        color="#ccc"></a-text>
 
 </a-entity>
 
